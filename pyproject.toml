@@ -1,0 +1,9 @@
+[project]
+name = "mybtdual"
+version = "0.1.0"
+description = "Bluetooth Dual-Boot Sync Tool - Sync Windows Bluetooth keys to Linux"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "python-registry>=1.3.1",
+]
