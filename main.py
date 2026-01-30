@@ -4,7 +4,7 @@ import os
 import shutil
 import struct
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any
 
 # python-registry imports
@@ -45,7 +45,12 @@ class WindowsRegistryLoader:
                 keys = {}
                 for value in device.values():
                     keys[value.name()] = value.value()
-                keys["__last_write__"] = device.timestamp().astimezone()
+                # Windows Registry stores timestamps in UTC.
+                # python-registry returns naive datetime objects (implicitly UTC).
+                # We set tzinfo=timezone.utc to make it aware, then convert to local system time.
+                keys["__last_write__"] = (
+                    device.timestamp().replace(tzinfo=timezone.utc).astimezone()
+                )
                 found_data[adapter_mac][device_mac] = keys
 
             for value in adapter.values():
@@ -55,7 +60,9 @@ class WindowsRegistryLoader:
                         found_data[adapter_mac][v_name] = {
                             "LinkKey": value.value(),
                             "__type__": "Legacy_Direct",
-                            "__last_write__": adapter.timestamp().astimezone(),
+                            "__last_write__": adapter.timestamp()
+                            .replace(tzinfo=timezone.utc)
+                            .astimezone(),
                         }
         return found_data
 
@@ -187,7 +194,9 @@ class LinuxConfigManager:
             }
             # Some devices set themselves as master and linux as slave during pairing.
             # To ensure compatibility, we also write PeripheralLongTermKey and SlaveLongTermKey.
-            sections_to_write["PeripheralLongTermKey"] = sections_to_write["LongTermKey"]
+            sections_to_write["PeripheralLongTermKey"] = sections_to_write[
+                "LongTermKey"
+            ]
             sections_to_write["SlaveLongTermKey"] = sections_to_write["LongTermKey"]
 
         # 3. BLE IRK
@@ -328,7 +337,9 @@ def main():
                 match_type = "DIRECT"
                 ts = target_keys.get("__last_write__")
                 match_info = (
-                    f"Last Modified: {ts.strftime('%Y-%m-%d %H:%M')}" if ts else "Unknown"
+                    f"Last Modified: {ts.strftime('%Y-%m-%d %H:%M')}"
+                    if ts
+                    else "Unknown"
                 )
             else:
                 # B. Heuristic Match
@@ -377,7 +388,7 @@ def main():
         # Truncate name if too long
         name_display = (c["name"][:17] + "..") if len(c["name"]) > 19 else c["name"]
         print(
-            f"{idx+1:<4} | {c['device']:<18} | {name_display:<20} | {c['match_type']:<10} | {c['match_info']}"
+            f"{idx + 1:<4} | {c['device']:<18} | {name_display:<20} | {c['match_type']:<10} | {c['match_info']}"
         )
     print("=" * 100)
 

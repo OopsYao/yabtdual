@@ -147,3 +147,4 @@ sudo systemctl restart bluetooth
 - 本工具涉及修改系统级配置文件，尽管包含备份功能，请谨慎使用。
 - 部分高端蓝牙设备（如 Logitech Flow 系列）可能自带多设备切换功能，无需使用此工具。
 - 某些新的 Windows 版本可能将 Key 加密存储，需要额外的解密步骤（待实现）。
+- **时间显示**: 工具假设 Windows 系统时间设置为 UTC (RealTimeIsUniversal=1) 或 Linux 已正确配置以处理 Windows 的本地时间存储方式。若两者设置不一致，显示的“最后修改时间”可能会有偏差，但不影响密钥同步功能。
