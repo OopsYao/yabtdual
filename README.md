@@ -106,7 +106,23 @@ Linux (BlueZ) 的配置文件结构清晰且易于通过 Root 权限修改，而
 ### 依赖 (Dependencies)
 需要 Python 3.10+ 以及处理注册表 Hive 的库。
 ```bash
-# 使用 uv (推荐)
+# 使用 uv (推荐, 本地开发)
+uv sync
+
+# 或直接 tool install (无需手动 clone)
+uv tool install git+https://github.com/<user>/mybtdual
+```
+
+### 安装 (Installation)
+
+```bash
+# 从 GitHub 安装 (推荐)
+uv tool install git+https://github.com/<user>/mybtdual
+
+# 或使用 pipx
+pipx install git+https://github.com/<user>/mybtdual
+
+# 本地开发
 uv sync
 ```
 
@@ -115,11 +131,14 @@ uv sync
 
 #### 1. 运行工具
 ```bash
-# 标准模式
-sudo uv run python main.py --win-path /mnt/c/Windows/System32/config/SYSTEM
+# 标准模式 (package 安装后)
+sudo mybtdual --win-path /mnt/c/Windows/System32/config/SYSTEM
 
 # 仅预览 (Dry Run)
-uv run python main.py --win-path /mnt/c/Windows/System32/config/SYSTEM --dry-run
+sudo mybtdual --win-path /mnt/c/Windows/System32/config/SYSTEM --dry-run
+
+# 本地开发模式
+sudo uv run mybtdual --win-path /mnt/c/Windows/System32/config/SYSTEM
 ```
 
 #### 2. 交互流程

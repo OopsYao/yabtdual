@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "mybtdual"
 version = "0.1.0"
@@ -7,3 +11,9 @@ requires-python = ">=3.10"
 dependencies = [
     "python-registry>=1.3.1",
 ]
+
+[project.scripts]
+mybtdual = "mybtdual.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
