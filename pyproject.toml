@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "yabtdual"
-version = "0.1.0"
+version = "1.0.0"
 description = "Yet Another Bluetooth Dualboot Sync Tool - Sync Windows Bluetooth keys to Linux"
 readme = "README.md"
 requires-python = ">=3.10"
