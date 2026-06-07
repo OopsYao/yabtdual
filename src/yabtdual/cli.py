@@ -241,7 +241,7 @@ class LinuxConfigManager:
                     print(f"[*] Backing up {path} -> {backup_path}")
                     shutil.copy2(path, backup_path)
                 elif path != original_path and os.path.exists(original_path):
-                    # Copy original config if creating a new dual-entry to preserve metadata/permissions
+                    # Copy original if creating new dual-entry to preserve metadata/permissions
                     print(f"[*] Copying base config from {original_path} to {path}")
                     shutil.copy2(original_path, path)
 
@@ -359,7 +359,10 @@ def main():
                     target_keys = cand_data
                     win_mac = cand_mac
                     match_type = "HEURISTIC"
-                    match_info = f"Mapped to Win Dev {cand_mac} ({latest_ts.strftime('%Y-%m-%d %H:%M')})"
+                    match_info = (
+                        f"Mapped to Win Dev {cand_mac}"
+                        f" ({latest_ts.strftime('%Y-%m-%d %H:%M')})"
+                    )
 
             if target_keys:
                 candidates.append(
@@ -388,7 +391,8 @@ def main():
         # Truncate name if too long
         name_display = (c["name"][:17] + "..") if len(c["name"]) > 19 else c["name"]
         print(
-            f"{idx + 1:<4} | {c['device']:<18} | {name_display:<20} | {c['match_type']:<10} | {c['match_info']}"
+            f"{idx + 1:<4} | {c['device']:<18} | {name_display:<20}"
+            f" | {c['match_type']:<10} | {c['match_info']}"
         )
     print("=" * 100)
 
@@ -434,7 +438,8 @@ def main():
         )
 
     print(
-        "\n[*] Done. Please restart bluetooth service (systemctl restart bluetooth) to apply changes."
+        "\n[*] Done. Please restart bluetooth service"
+        " (systemctl restart bluetooth) to apply changes."
     )
 
 
