@@ -3,9 +3,9 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mybtdual"
+name = "yabtdual"
 version = "0.1.0"
-description = "Bluetooth Dual-Boot Sync Tool - Sync Windows Bluetooth keys to Linux"
+description = "Yet Another Bluetooth Dualboot Sync Tool - Sync Windows Bluetooth keys to Linux"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [project.scripts]
-mybtdual = "mybtdual.cli:main"
+yabtdual = "yabtdual.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

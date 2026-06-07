@@ -1,7 +1,7 @@
-# MyBtDual (Bluetooth Dual-Boot Sync Tool)
+# yabtdual (Yet Another Bluetooth Dualboot)
 
 ## 📖 Introduction
-**MyBtDual** is a Python automation tool designed to solve the problem of repeatedly pairing Bluetooth devices on Windows and Linux dual-boot systems.
+**yabtdual** is a Python automation tool designed to solve the problem of repeatedly pairing Bluetooth devices on Windows and Linux dual-boot systems.
 
 Typically, when a Bluetooth device (e.g., keyboard, mouse, headset) pairs with a computer, a unique Link Key is generated. If you pair on OS A, then boot into OS B and pair again, the device generates a new Link Key, invalidating the old key on OS A.
 
@@ -110,17 +110,17 @@ Requires Python 3.10+ and a library for parsing registry hives.
 uv sync
 
 # Or install directly via tool (no manual clone needed)
-uv tool install git+https://github.com/<user>/mybtdual
+uv tool install git+https://github.com/<user>/yabtdual
 ```
 
 ### Installation
 
 ```bash
 # Install from GitHub (recommended)
-uv tool install git+https://github.com/<user>/mybtdual
+uv tool install git+https://github.com/<user>/yabtdual
 
 # Or using pipx
-pipx install git+https://github.com/<user>/mybtdual
+pipx install git+https://github.com/<user>/yabtdual
 
 # Local development
 uv sync
@@ -132,13 +132,13 @@ uv sync
 #### 1. Run the tool
 ```bash
 # Standard mode (after package install)
-sudo mybtdual --win-path /mnt/c/Windows/System32/config/SYSTEM
+sudo yabtdual --win-path /mnt/c/Windows/System32/config/SYSTEM
 
 # Preview only (Dry Run)
-sudo mybtdual --win-path /mnt/c/Windows/System32/config/SYSTEM --dry-run
+sudo yabtdual --win-path /mnt/c/Windows/System32/config/SYSTEM --dry-run
 
 # Local development mode
-sudo uv run mybtdual --win-path /mnt/c/Windows/System32/config/SYSTEM
+sudo uv run yabtdual --win-path /mnt/c/Windows/System32/config/SYSTEM
 ```
 
 #### 2. Interactive Flow

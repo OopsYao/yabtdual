@@ -280,7 +280,7 @@ class LinuxConfigManager:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="MyBtDual - Bluetooth Dual Boot Key Sync"
+        description="yabtdual - Yet Another Bluetooth Dualboot Key Sync"
     )
     parser.add_argument(
         "--win-path", required=True, help="Path to Windows SYSTEM registry hive"

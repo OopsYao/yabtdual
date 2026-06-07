@@ -12,7 +12,7 @@ wheels = [
 ]
 
 [[package]]
-name = "mybtdual"
+name = "yabtdual"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
